@@ -1,0 +1,11 @@
+[project]
+name = "workshop-python-optimization"
+version = "0"
+requires-python = ">=3.12"
+dependencies = [
+  "profiling-explorer",
+  "tprof",
+]
+
+[tool.uv]
+package = false

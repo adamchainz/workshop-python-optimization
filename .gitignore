@@ -1,0 +1,7 @@
+/.venv/
+/access.log
+/bots.txt
+*.json
+*.pstats
+/expected.txt
+__pycache__/

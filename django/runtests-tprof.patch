@@ -1,0 +1,23 @@
+diff --git a/tests/runtests.py b/tests/runtests.py
+index 10a44b040..ef5d36481 100755
+--- a/tests/runtests.py
++++ b/tests/runtests.py
+@@ -411,7 +411,17 @@ def django_tests(
+         shuffle=shuffle,
+         durations=durations,
+     )
+-    failures = test_runner.run_tests(test_labels)
++    if targets := os.environ.get("TPROF_TARGETS", "").split():
++        from tprof import tprof
++
++        with tprof(
++            *targets,
++            json_path=os.environ.get("TPROF_JSON"),
++            baseline_path=os.environ.get("TPROF_BASELINE"),
++        ):
++            failures = test_runner.run_tests(test_labels)
++    else:
++        failures = test_runner.run_tests(test_labels)
+     teardown_run_tests(state)
+     return failures
+
